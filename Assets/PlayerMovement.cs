@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         
         _timeSinceJump += Time.deltaTime;
 
-        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))) 
+        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))) 
         {
             Rigidbody2D.velocity *= new Vector2(1, velocityFallMultiplier);
         }
