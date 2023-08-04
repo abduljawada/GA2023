@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
-    [SerializeField] private Vector2 _moveDir = new(1,0);
+    [SerializeField] private Vector2 moveDir = new(1,0);
     [SerializeField] private float speed = 3.5f;
 
     private void Update()
     {
-        transform.Translate(_moveDir * speed * Time.deltaTime);
+        transform.Translate(moveDir * (speed * Time.deltaTime));
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
-            _moveDir *= -1;
+        if (other.gameObject.CompareTag("Player"))
+	{
+            other.gameObject.GetComponent<Health>().LoseHealth();
+            moveDir *= -1;
+	}
+	else if (other.gameObject.CompareTag("Obstacle"))
+	{
+            moveDir *= -1;
+	}
     }
 }
