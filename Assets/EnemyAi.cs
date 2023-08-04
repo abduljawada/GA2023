@@ -11,7 +11,14 @@ public class EnemyAi : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Player"))
+	{
+            other.gameObject.GetComponent<Health>().LoseHealth();
             moveDir *= -1;
+	}
+	else if (other.gameObject.CompareTag("Obstacle"))
+	{
+            moveDir *= -1;
+	}
     }
 }
