@@ -5,7 +5,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
 
     private float _moveDir;
-    
+    public Transform attackPoint;
+
     [Header("Speed")]
     [SerializeField] private float acceleration = 3f;
     [SerializeField] private float maxSpeed = 5f;
@@ -33,8 +34,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Rigidbody2D.velocity *= new Vector2(1, velocityFallMultiplier);
         }
+        
+        if (_moveDir > 0)
+        {
+            attackPoint.localPosition = new(0.75f, 0);
+        }
+        else if (_moveDir < 0)
+        {
+            attackPoint.localPosition = new(-0.75f, 0);
+        }
     }
-
     private void FixedUpdate()
     {
         var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * acceleration);

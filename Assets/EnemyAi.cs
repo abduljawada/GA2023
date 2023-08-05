@@ -11,14 +11,16 @@ public class EnemyAi : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
+        // Upon colliding with the player inflict damage and change position
         if (other.gameObject.CompareTag("Player"))
-	{
+	    {
             other.gameObject.GetComponent<Health>().LoseHealth();
             moveDir *= -1;
-	}
-	else if (other.gameObject.CompareTag("Obstacle"))
-	{
+	    }
+        // Upon colliding with an obstacle, changes position
+	    else if (other.gameObject.CompareTag("Obstacle"))
+	    {
             moveDir *= -1;
-	}
+	    }
     }
 }
