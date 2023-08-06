@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 937383435685545377}
   - component: {fileID: 6518816623773855828}
   - component: {fileID: 7508515793300074500}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5692abd5c0b75a0ffa6b9498aa6338a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 2
   onDamageEvent:
     m_PersistentCalls:
       m_Calls: []

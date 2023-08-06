@@ -3,24 +3,28 @@ using UnityEngine;
 public class Fly : MonoBehaviour
 {
 	private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
-	
-	[SerializeField] private float flyForce = 3f;
-	[SerializeField] private float flyTime = 10f;
-	[SerializeField] private float maxFlySpeed = 20f;
-	
+
+	private const float FlyForce = 3f;
+	private float _flyTime = 5f;
+	private const float MaxFlySpeed = 20f;
+	private bool _willFly;	
+
 	private void Update()
 	{
-		flyTime -= Time.deltaTime;
+		_flyTime -= Time.deltaTime;
 
-		if(flyTime <= 0) Destroy(this);
+		if(_flyTime <= 0) Destroy(this);
 
-		if (Input.GetKey(KeyCode.Space))
+		_willFly = Input.GetKey(KeyCode.Space);
+	}
+	
+	private void FixedUpdate()
+	{
+		if (!_willFly) return;
+		Rigidbody2D.AddForce(Vector2.up * FlyForce, ForceMode2D.Impulse);
+		if (Rigidbody2D.velocity.y > MaxFlySpeed)
 		{
-			Rigidbody2D.AddForce(Vector2.up * flyForce, ForceMode2D.Impulse);
-			if (Rigidbody2D.velocity.y > maxFlySpeed)
-			{
-				Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, maxFlySpeed);
-			}
+			Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, MaxFlySpeed);
 		}
 	}
 }

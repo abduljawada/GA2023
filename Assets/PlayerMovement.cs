@@ -37,11 +37,11 @@ public class PlayerMovement : MonoBehaviour
         
         if (_moveDir > 0)
         {
-            attackPoint.localPosition = new(0.75f, 0);
+            attackPoint.localPosition = new(1.0f, 0);
         }
         else if (_moveDir < 0)
         {
-            attackPoint.localPosition = new(-0.75f, 0);
+            attackPoint.localPosition = new(-1.0f, 0);
         }
     }
     private void FixedUpdate()
