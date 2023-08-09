@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class EnemyAi : MonoBehaviour
 {
     [SerializeField] private GameObject mutationPrefab;
