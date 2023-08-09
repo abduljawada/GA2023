@@ -33,11 +33,11 @@ public class Health : MonoBehaviour
         onDeathEvent?.Invoke();
 
         if (gameObject.tag.Equals("Player"))
-	{
-	       	SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-	}
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 	
-	Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public void Reset()
