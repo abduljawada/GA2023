@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         
         _timeSinceJump += Time.deltaTime;
 
-        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))) 
+        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !Input.GetKey(KeyCode.UpArrow)) 
         {
             Rigidbody2D.velocity *= new Vector2(1, velocityFallMultiplier);
         }
