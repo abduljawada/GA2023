@@ -28,6 +28,7 @@ public class MutationManager : MonoBehaviour
         
         for (var i = 0; i < _mutationInventory.Length; i++)
         {
+            Debug.Log(_mutationInventory[i]);
             if (_mutationInventory[i] != null) continue;
             Debug.Log("Element " + i + " is empty");
             emptyElement = i;
@@ -50,9 +51,11 @@ public class MutationManager : MonoBehaviour
         var mutationData = _mutationInventory[index];
         Destroy(gameObject.AddComponent(Type.GetType(mutationData.name)), mutationData.duration);
         mutationData.remainingUses--;
+        Debug.Log(mutationData.remainingUses);
         if (mutationData.remainingUses <= 0)
         {
             _mutationInventory[index] = null;
+            Debug.Log("removed mutation from inventory");
         }
     }
 }
