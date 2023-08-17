@@ -23,10 +23,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float circleRadius = 0.4f;
     
     [Header("Attack")]
-    [SerializeField] private GameObject hurtbox;
+    [SerializeField] private GameObject hitbox;
     [SerializeField] private float attackRate = 0.5f;
     [SerializeField] private float attackTime = 0.3f;
-    private float _nextFireTime;
+    private float _nextAttackTime;
     private bool _isAttacking;
 
     private void Update()
@@ -44,17 +44,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_isAttacking)
         {
-            hurtbox.transform.localPosition = _moveDir switch
+            hitbox.transform.localPosition = _moveDir switch
             {
                 > 0 => new Vector3(1.0f, 0),
                 < 0 => new Vector3(-1.0f, 0),
-                _ => hurtbox.transform.localPosition
+                _ => hitbox.transform.localPosition
             };
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && Time.time > _nextFireTime)
+        if (Input.GetKeyDown(KeyCode.Z) && Time.time > _nextAttackTime)
         {
-            _nextFireTime = Time.time + attackRate;
+            _nextAttackTime = Time.time + attackRate;
             StartCoroutine(AttackCoroutine());
         }
     }
@@ -75,9 +75,9 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
-        hurtbox.SetActive(true);
+        hitbox.SetActive(true);
         yield return new WaitForSeconds(attackTime);
-        hurtbox.SetActive(false);
+        hitbox.SetActive(false);
         _isAttacking = false;
     }
 
