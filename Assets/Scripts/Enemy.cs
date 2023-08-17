@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Generic Attributes")]
-    [SerializeField] private float hearingRange;
+    [SerializeField] private float hearingRange = 5f;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private GameObject mutationPrefab;
     protected enum States
@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
         State = States.Chase;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
