@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class DamageOnTrigger : MonoBehaviour
 {
-    
+    [SerializeField] private string otherTag;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(otherTag))
         {
             other.GetComponent<Health>().LoseHealth();
         }
