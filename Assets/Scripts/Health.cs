@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         
         onDamageEvent?.Invoke();
 
-        if (gameObject.tag.Equals("Player"))
+        if (transform.parent.tag.Equals("Player"))
         {
                 playerHealthText.text = _currentHealth.ToString();
         }
@@ -32,12 +32,12 @@ public class Health : MonoBehaviour
         if (_currentHealth > 0) return;
         onDeathEvent?.Invoke();
 
-        if (gameObject.tag.Equals("Player"))
+        if (transform.parent.tag.Equals("Player"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 	
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public void Reset()

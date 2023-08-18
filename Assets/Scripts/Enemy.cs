@@ -27,14 +27,6 @@ public abstract class Enemy : MonoBehaviour
     {
         State = States.Chase;
     }
-
-    protected virtual void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<Health>().LoseHealth();
-        }
-    }
     
     private void OnDestroy()
     {
