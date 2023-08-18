@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();

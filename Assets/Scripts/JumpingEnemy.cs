@@ -33,10 +33,8 @@ public class JumpingEnemy : Enemy
         return Physics2D.OverlapCircle(transform.position - Vector3.up * 0.5f, circleRadius, groundLayer);
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        base.OnCollisionEnter2D(other);
-
         if (!other.gameObject.tag.Equals("Obstacle") && !other.gameObject.tag.Equals("Player")) return;
         jumpDir *= _flipXVector2;
         Rigidbody2D.velocity = new Vector2(jumpDir.x, Rigidbody2D.velocity.y);
