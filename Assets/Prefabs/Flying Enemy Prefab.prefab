@@ -56,10 +56,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flying Enemy Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8010194105115732091, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_IsTrigger
       value: 0
