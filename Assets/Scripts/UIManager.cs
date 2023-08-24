@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
     {
         public Image mutationImage;
         public TMP_Text usesText;
+        public Image fill;
     }
     private void Start()
     {
@@ -32,6 +34,8 @@ public class UIManager : MonoBehaviour
     {
         var mutationSlot = mutationSlotsUI[e.MutationSlot];
         mutationSlot.usesText.text = e.MutationData.remainingUses.ToString();
+        mutationSlot.fill.fillAmount = 1f;
+        StartCoroutine(AnimateImageFillCoroutine(e.MutationData, mutationSlot));
     }
     
     private void MutationManagerOnOnRemoveMutation(object sender, MutationManager.MutationEventArgs e)
@@ -40,5 +44,17 @@ public class UIManager : MonoBehaviour
         mutationSlot.mutationImage.sprite = null;
         mutationSlot.mutationImage.color = Color.clear;
         mutationSlot.usesText.text = "";
+    }
+
+    private static IEnumerator AnimateImageFillCoroutine(MutationData mutationData, MutationSlot mutationSlot)
+    {
+        var mutationEndTime = Time.time + mutationData.duration;
+        while (Time.time < mutationEndTime)
+        {
+            mutationSlot.fill.fillAmount = (mutationEndTime - Time.time) / mutationData.duration;
+            yield return new WaitForEndOfFrame();
+        }
+
+        mutationSlot.fill.fillAmount = 0f;
     }
 }
