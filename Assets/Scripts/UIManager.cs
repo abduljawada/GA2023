@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     {
         var mutationSlot = mutationSlotsUI[e.MutationSlot];
         mutationSlot.mutationImage.sprite = e.MutationData.icon;
+        mutationSlot.mutationImage.color = Color.white;
         mutationSlot.usesText.text = e.MutationData.remainingUses.ToString();
     }
 
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
     {
         var mutationSlot = mutationSlotsUI[e.MutationSlot];
         mutationSlot.mutationImage.sprite = null;
+        mutationSlot.mutationImage.color = Color.clear;
         mutationSlot.usesText.text = "";
     }
 }

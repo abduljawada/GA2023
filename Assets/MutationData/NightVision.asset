@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c571075c3a1c887b0b4fd432202e9618, type: 3}
   m_Name: NightVision
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 12a564a5365561b46a64441e8bf1e98c, type: 3}
   duration: 10
   maxUses: 3
-  remainingUses: 1
+  remainingUses: 2
