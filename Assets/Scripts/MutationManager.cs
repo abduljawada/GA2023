@@ -39,7 +39,6 @@ public class MutationManager : MonoBehaviour
         {
             Debug.Log(_mutationInventory[i]);
             if (_mutationInventory[i] != null) continue;
-            Debug.Log("Element " + i + " is empty");
             emptyElement = i;
             break;
         }
@@ -47,7 +46,6 @@ public class MutationManager : MonoBehaviour
         if (emptyElement == -1) return;
         
         if (_mutationInventory.Contains(mutationData)) return;
-        Debug.Log("Array doesn't contain mutation");
 
         _mutationInventory[emptyElement] = mutationData;
         mutationData.remainingUses = mutationData.maxUses;
@@ -62,7 +60,6 @@ public class MutationManager : MonoBehaviour
         var mutationData = _mutationInventory[index];
         Destroy(gameObject.AddComponent(Type.GetType(mutationData.name)), mutationData.duration);
         mutationData.remainingUses--;
-        Debug.Log(mutationData.remainingUses);
         if (mutationData.remainingUses <= 0)
         {
             StartCoroutine(RemoveMutationCoroutine(index));
@@ -75,7 +72,6 @@ public class MutationManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_mutationInventory[index].duration);
         _mutationInventory[index] = null;
-        Debug.Log("removed mutation from inventory");
         OnRemoveMutation?.Invoke(this, new MutationEventArgs { MutationData = _mutationInventory[index], MutationSlot = index });
     }
 }
