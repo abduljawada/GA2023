@@ -1,11 +1,20 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class MutationManager : MonoBehaviour
 {
+    public event EventHandler<MutationEventArgs> OnAddMutation;
+    public event EventHandler<MutationEventArgs> OnActivateMutation;
+    public event EventHandler<MutationEventArgs> OnRemoveMutation;
+    public class MutationEventArgs : EventArgs
+    {
+        public MutationData MutationData;
+        public int MutationSlot;
+    }
     private readonly MutationData[] _mutationInventory = new MutationData[2];
-
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
@@ -44,6 +53,8 @@ public class MutationManager : MonoBehaviour
         mutationData.remainingUses = mutationData.maxUses;
         
         Destroy(mutationObject);
+        
+        OnAddMutation?.Invoke(this, new MutationEventArgs { MutationData = _mutationInventory[emptyElement], MutationSlot = emptyElement });
     }
 
     private void ActivateMutation(int index)
@@ -54,8 +65,17 @@ public class MutationManager : MonoBehaviour
         Debug.Log(mutationData.remainingUses);
         if (mutationData.remainingUses <= 0)
         {
-            _mutationInventory[index] = null;
-            Debug.Log("removed mutation from inventory");
+            StartCoroutine(RemoveMutationCoroutine(index));
         }
+        
+        OnActivateMutation?.Invoke(this, new MutationEventArgs { MutationData = _mutationInventory[index], MutationSlot = index });
+    }
+
+    private IEnumerator RemoveMutationCoroutine(int index)
+    {
+        yield return new WaitForSeconds(_mutationInventory[index].duration);
+        _mutationInventory[index] = null;
+        Debug.Log("removed mutation from inventory");
+        OnRemoveMutation?.Invoke(this, new MutationEventArgs { MutationData = _mutationInventory[index], MutationSlot = index });
     }
 }
