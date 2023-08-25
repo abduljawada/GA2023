@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private float _nextAttackTime;
     private bool _isAttacking;
 
+    
+
     private void Update()
     {
         _moveDir = Input.GetAxisRaw("Horizontal");
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             _nextAttackTime = Time.time + attackRate;
             StartCoroutine(AttackCoroutine());
         }
+
     }
     private void FixedUpdate()
     {
@@ -90,4 +93,6 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position - Vector3.up * 0.5f, circleRadius);
     }
+
+
 }
