@@ -31,13 +31,12 @@ public class PauseMenu : MonoBehaviour
         _gameIsPaused = true;
     }
 
-    public void LoadMenu()
+    private void LoadMenu()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
-    public void QuitGame()
+    private void QuitGame()
     {
         Debug.Log("Quitting game...");
         Application.Quit();
