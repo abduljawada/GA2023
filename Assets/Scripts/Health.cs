@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
 
         if (transform.parent.tag.Equals("Player"))
         {
-                playerHealthText.text = _currentHealth.ToString();
+            playerHealthText.text = _currentHealth.ToString();
         }
 
         if (_currentHealth > 0) return;
@@ -34,7 +34,7 @@ public class Health : MonoBehaviour
 
         if (transform.parent.tag.Equals("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            FindObjectOfType<GameOver>().EndGame();
         }
 	
         Destroy(transform.parent.gameObject);
