@@ -19,7 +19,9 @@ public abstract class Enemy : MonoBehaviour
         var playerCollider2D = Physics2D.OverlapCircle(transform.position, hearingRange, _playerLayerMask);
         if (!playerCollider2D) return;
 
-        if (!Physics2D.Raycast(transform.position, playerCollider2D.transform.position - transform.position).collider.Equals(playerCollider2D)) return;
+        var raycastHit2D = Physics2D.Raycast(transform.position, playerCollider2D.transform.position - transform.position);
+        //Debug.Log(raycastHit2D.collider.name);
+        if (!raycastHit2D.collider.Equals(playerCollider2D) && !raycastHit2D.collider.name.Equals("Player")) return;
         
         TransitionToChase(playerCollider2D);
     }

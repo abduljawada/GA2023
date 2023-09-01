@@ -35,8 +35,7 @@ public class EnemyJumping : Enemy
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //TODO: Fix Collision
-        if (!other.gameObject.tag.Equals("Obstacle") && !other.gameObject.tag.Equals("Player")) return;
+        if (IsGrounded()) return;
         jumpDir *= _flipXVector2;
         Rigidbody2D.velocity = new Vector2(jumpDir.x, Rigidbody2D.velocity.y);
     }

@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Name
-      value: Flying Enemy Prefab
+      value: Enemy Flying Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Layer
@@ -91,11 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearingRange: 5
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
   mutationPrefab: {fileID: 2732505442708444717, guid: 5b5272434a8e07c0b92dbd419038073d, type: 3}
-  flyPoint: {x: 0, y: 13}
+  flyPoint: {x: 0, y: 0}
   flyDistance: 3
   speed: 3
   eggPrefab: {fileID: 9200714214602148596, guid: a499c9375379991759ce18331d7f3c0c, type: 3}
