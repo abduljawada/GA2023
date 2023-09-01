@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
         public Image mutationImage;
         public TMP_Text usesText;
         public Image fill;
+        public GameObject buttonText;
     }
     private void Start()
     {
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
         mutationSlot.mutationImage.sprite = e.MutationData.icon;
         mutationSlot.mutationImage.color = Color.white;
         mutationSlot.usesText.text = e.MutationData.remainingUses.ToString();
+        mutationSlot.buttonText.SetActive(true);
     }
 
     private void MutationManagerOnOnActivateMutation(object sender, MutationManager.MutationEventArgs e)
@@ -44,6 +46,7 @@ public class UIManager : MonoBehaviour
         mutationSlot.mutationImage.sprite = null;
         mutationSlot.mutationImage.color = Color.clear;
         mutationSlot.usesText.text = "";
+        mutationSlot.buttonText.SetActive(false);
     }
 
     private static IEnumerator AnimateImageFillCoroutine(MutationData mutationData, MutationSlot mutationSlot)

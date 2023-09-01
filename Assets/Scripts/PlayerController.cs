@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
 
-
+    [FormerlySerializedAs("acceleration")]
     [Header("Speed")]
-    [SerializeField] private float acceleration = 3f;
+    [SerializeField] private float groundAcceleration = 3f;
+
+    [SerializeField] private float airAcceleration = 5f;
     [SerializeField] private float maxSpeed = 5f;
     private float _moveDir;
     
@@ -19,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckOffset = 1f;
     [SerializeField] private float circleRadius = 0.4f;
     
     [Header("Attack")]
@@ -60,8 +64,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * acceleration);
-
+        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * (IsGrounded()? groundAcceleration : airAcceleration));
         Rigidbody2D.velocity = new Vector2(moveVelocityX, Rigidbody2D.velocity.y);
     }
 
@@ -83,13 +86,15 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(transform.position - Vector3.up * 0.5f, circleRadius, groundLayer);
+        var transform1 = transform;
+        return Physics2D.OverlapCircle(transform1.position - Vector3.up * (groundCheckOffset * transform1.localScale.x), circleRadius, groundLayer);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position - Vector3.up * 0.5f, circleRadius);
+        var transform1 = transform;
+        Gizmos.DrawWireSphere(transform1.position - Vector3.up * (groundCheckOffset * transform1.localScale.x), circleRadius);
     }
 
 

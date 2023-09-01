@@ -4,8 +4,8 @@ public abstract class Enemy : MonoBehaviour
 {
     [Header("Generic Attributes")]
     [SerializeField] private float hearingRange = 5f;
-    [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private GameObject mutationPrefab;
+    private readonly LayerMask _playerLayerMask = 1 << 8;
     protected enum States
     {
         Idle,
@@ -16,14 +16,22 @@ public abstract class Enemy : MonoBehaviour
 
     protected void CheckPlayerInRange()
     {
-        if (!Physics2D.OverlapCircle(transform.position, hearingRange, playerLayerMask)) return;
+        var playerCollider2D = Physics2D.OverlapCircle(transform.position, hearingRange, _playerLayerMask);
+        if (!playerCollider2D) return;
 
-        //TODO: Check LOS
+        var raycastHit2D = Physics2D.Raycast(transform.position, playerCollider2D.transform.position - transform.position);
+        //Debug.Log(raycastHit2D.collider.name);
+        if (!raycastHit2D.collider.Equals(playerCollider2D) && !raycastHit2D.collider.name.Equals("Player")) return;
         
-        TransitionToChase();
+        TransitionToChase(playerCollider2D);
     }
 
-    protected virtual void TransitionToChase()
+    protected virtual void TransitionToIdle()
+    {
+        State = States.Idle;
+    }
+    
+    protected virtual void TransitionToChase(Collider2D player)
     {
         State = States.Chase;
     }
