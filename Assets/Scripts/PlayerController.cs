@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour
     private float _nextAttackTime;
     private bool _isAttacking;
 
-    
-
     private void Update()
     {
         _moveDir = Input.GetAxisRaw("Horizontal");
