@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c571075c3a1c887b0b4fd432202e9618, type: 3}
   m_Name: Shrink
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4146c1ffa25223d29bd8beaee213b51e, type: 3}
   duration: 10
   maxUses: 3
-  remainingUses: 0
+  remainingUses: 2

@@ -76,3 +76,6 @@ crashlytics-build.properties
 
 #Visual Studio Config File
 .vsconfig
+
+#Mono Crash Blob
+*.blob
