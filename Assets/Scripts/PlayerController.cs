@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(GroundChecker))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
+    private GroundChecker GroundChecker => GetComponent<GroundChecker>();
 
     [FormerlySerializedAs("acceleration")]
     [Header("Speed")]
@@ -20,11 +23,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float velocityFallMultiplier = 0.5f;
     private float _timeSinceJump;
     
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundCheckOffset = 1f;
-    [SerializeField] private float circleRadius = 0.4f;
-    
     [Header("Attack")]
     [SerializeField] private GameObject hitbox;
     [SerializeField] private float attackRate = 0.5f;
@@ -36,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         _moveDir = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded()) Jump();
+        if (Input.GetKeyDown(KeyCode.UpArrow) && GroundChecker.IsGrounded()) Jump();
         
         _timeSinceJump += Time.deltaTime;
 
@@ -55,16 +53,14 @@ public class PlayerController : MonoBehaviour
             };
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && Time.time > _nextAttackTime)
-        {
-            _nextAttackTime = Time.time + attackRate;
-            StartCoroutine(AttackCoroutine());
-        }
+        if (!Input.GetKeyDown(KeyCode.Z) || !(Time.time > _nextAttackTime)) return;
+        _nextAttackTime = Time.time + attackRate;
+        StartCoroutine(AttackCoroutine());
 
     }
     private void FixedUpdate()
     {
-        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * (IsGrounded()? groundAcceleration : airAcceleration));
+        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * (GroundChecker.IsGrounded()? groundAcceleration : airAcceleration));
         Rigidbody2D.velocity = new Vector2(moveVelocityX, Rigidbody2D.velocity.y);
     }
 
@@ -83,19 +79,4 @@ public class PlayerController : MonoBehaviour
         hitbox.SetActive(false);
         _isAttacking = false;
     }
-
-    private bool IsGrounded()
-    {
-        var transform1 = transform;
-        return Physics2D.OverlapCircle(transform1.position - Vector3.up * (groundCheckOffset * transform1.localScale.x), circleRadius, groundLayer);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        var transform1 = transform;
-        Gizmos.DrawWireSphere(transform1.position - Vector3.up * (groundCheckOffset * transform1.localScale.x), circleRadius);
-    }
-
-
 }
