@@ -33,11 +33,23 @@ public class MutationManager : MonoBehaviour
 
     public void AddMutation(GameObject mutationObject, MutationData mutationData)
     {
+        if (_mutationInventory.Contains(mutationData))
+        {
+            mutationData.remainingUses = mutationData.maxUses;
+            Destroy(mutationObject);
+            for (var i = 0; i < _mutationInventory.Length; i++)
+            {
+                if (!_mutationInventory[i].Equals(mutationData)) continue;
+                OnAddMutation?.Invoke(this, new MutationEventArgs { MutationData = _mutationInventory[i], MutationSlot = i });
+                return;
+            }
+            return;
+        }
+        
         var emptyElement = -1;
         
         for (var i = 0; i < _mutationInventory.Length; i++)
         {
-            Debug.Log(_mutationInventory[i]);
             if (_mutationInventory[i] != null) continue;
             emptyElement = i;
             break;
@@ -45,7 +57,6 @@ public class MutationManager : MonoBehaviour
         
         if (emptyElement == -1) return;
         
-        if (_mutationInventory.Contains(mutationData)) return;
 
         _mutationInventory[emptyElement] = mutationData;
         mutationData.remainingUses = mutationData.maxUses;
