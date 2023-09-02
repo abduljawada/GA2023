@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
     private GroundChecker GroundChecker => GetComponent<GroundChecker>();
 
+    [SerializeField] private SaveData saveData;
+    
     [FormerlySerializedAs("acceleration")]
     [Header("Speed")]
     [SerializeField] private float groundAcceleration = 3f;
@@ -29,6 +32,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackTime = 0.3f;
     private float _nextAttackTime;
     private bool _isAttacking;
+
+    private void Start()
+    {
+        transform.position = saveData.spawnPos;
+    }
 
     private void Update()
     {
