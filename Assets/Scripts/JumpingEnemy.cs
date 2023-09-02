@@ -11,6 +11,7 @@ public class JumpingEnemy : Enemy
     private float _timeToNextJump;
     private readonly Vector2 _flipXVector2 = new Vector2(-1, 1);
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
+    private Animator animator;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class JumpingEnemy : Enemy
     private void Update()
     {
         if (!IsGrounded()) return;
-        
+
         _timeToNextJump -= Time.deltaTime;
 
         if (!(_timeToNextJump <= 0)) return;
@@ -38,5 +39,14 @@ public class JumpingEnemy : Enemy
         if (!other.gameObject.tag.Equals("Obstacle") && !other.gameObject.tag.Equals("Player")) return;
         jumpDir *= _flipXVector2;
         Rigidbody2D.velocity = new Vector2(jumpDir.x, Rigidbody2D.velocity.y);
+    }
+    private void JumpAnim()
+    {
+        animator.SetBool("IsOnGround", false);
+    }
+
+    private void IdleAnim()
+    {
+        animator.SetBool("IsOnGround", true);
     }
 }

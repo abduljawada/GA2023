@@ -6,7 +6,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float hearingRange = 5f;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private GameObject mutationPrefab;
-    [SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator;
     protected enum States
     {
         Idle,
