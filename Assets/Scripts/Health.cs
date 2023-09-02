@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -30,14 +29,8 @@ public class Health : MonoBehaviour
         }
 
         if (_currentHealth > 0) return;
+        
         onDeathEvent?.Invoke();
-
-        if (transform.tag.Equals("Player"))
-        {
-            FindObjectOfType<GameOver>().EndGame();
-        }
-	
-        Destroy(transform.parent.gameObject);
     }
 
     public void Reset()
