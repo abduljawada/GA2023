@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1149617262619623600}
   - component: {fileID: 274078636117935788}
   - component: {fileID: 7831252117442544465}
+  - component: {fileID: 1837144526609685708}
   m_Layer: 10
   m_Name: Enemy Prefab
   m_TagString: Untagged
@@ -193,8 +194,32 @@ MonoBehaviour:
       m_Calls: []
   onDeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1837144526609685708}
+        m_TargetAssemblyTypeName: EventDestroy, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerHealthText: {fileID: 0}
+--- !u!114 &1837144526609685708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4481973313431022222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ba1d8d93414a8091a98dc00b2bd1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6798011516110284991
 GameObject:
   m_ObjectHideFlags: 0
