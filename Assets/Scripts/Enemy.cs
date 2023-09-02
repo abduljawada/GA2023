@@ -38,7 +38,7 @@ public abstract class Enemy : MonoBehaviour
         State = States.Chase;
     }
     
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (!gameObject.scene.isLoaded) return;
         Instantiate(mutationPrefab, transform.position, Quaternion.identity);

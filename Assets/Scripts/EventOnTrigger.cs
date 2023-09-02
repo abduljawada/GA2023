@@ -7,5 +7,10 @@ public class EventOnTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         @event?.Invoke();
+
+        if (gameObject.tag.Equals("gem"))
+        {
+            FindObjectOfType<GemCollect>().AddGem();
+        }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - GameOverMenu
+  - gem
   layers:
   - Default
   - TransparentFX

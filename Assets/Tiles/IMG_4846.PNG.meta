@@ -113,10 +113,10 @@ TextureImporter:
       name: IMG_4846_0
       rect:
         serializedVersion: 2
-        x: 619
-        y: 1365.3333
-        width: 810
-        height: 682.6667
+        x: 520
+        y: 1365
+        width: 683
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8529771792de143128ccc88c01c4e730
-      internalID: -1483698173
+      spriteID: 90477c1446c3d59a0a48210e22fb9472
+      internalID: 1799001595
       vertices: []
       indices: 
       edges: []
@@ -134,10 +134,10 @@ TextureImporter:
       name: IMG_4846_1
       rect:
         serializedVersion: 2
-        x: 619
-        y: 683.3333
-        width: 810
-        height: 682.6667
+        x: 520
+        y: 683
+        width: 683
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57bf65ec33f6262d1a7422c79ba9dcd8
-      internalID: -648837754
+      spriteID: 588aa99f3bd7636b99e54309154a3cc0
+      internalID: -272630938
       vertices: []
       indices: 
       edges: []
@@ -155,10 +155,10 @@ TextureImporter:
       name: IMG_4846_2
       rect:
         serializedVersion: 2
-        x: 619
-        y: 1.333313
-        width: 810
-        height: 682.6667
+        x: 520
+        y: 1
+        width: 683
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6255934f567a3e537b3f09b5ee2b96ab
-      internalID: -907574218
+      spriteID: ccbf1302c91cfe52ea19f1710fe5fe60
+      internalID: 1648718438
       vertices: []
       indices: 
       edges: []
@@ -183,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_4846_0: -1483698173
-      IMG_4846_1: -648837754
-      IMG_4846_2: -907574218
+      IMG_4846_0: 1799001595
+      IMG_4846_1: -272630938
+      IMG_4846_2: 1648718438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
