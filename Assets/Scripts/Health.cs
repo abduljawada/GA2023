@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         
         onDamageEvent?.Invoke();
 
-        if (transform.parent.tag.Equals("Player"))
+        if (transform.tag.Equals("Player"))
         {
             playerHealthText.text = _currentHealth.ToString();
         }
@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
         if (_currentHealth > 0) return;
         onDeathEvent?.Invoke();
 
-        if (transform.parent.tag.Equals("Player"))
+        if (transform.tag.Equals("Player"))
         {
             FindObjectOfType<GameOver>().EndGame();
         }
