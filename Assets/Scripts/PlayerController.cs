@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
-
+    private AnimationManager animManager => GetComponent<AnimationManager>();
 
     [Header("Speed")]
     [SerializeField] private float acceleration = 3f;
@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody2D.velocity *= Vector2.right;
         Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _timeSinceJump = 0;
+        animManager.Invoke("JumpAnimation", 0.01f);
     }
     
     private IEnumerator AttackCoroutine()
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(transform.position - Vector3.up * 0.5f, circleRadius, groundLayer);
+        return Physics2D.OverlapCircle(transform.position - Vector3.up * 1f, circleRadius, groundLayer);
     }
 
     private void OnDrawGizmosSelected()

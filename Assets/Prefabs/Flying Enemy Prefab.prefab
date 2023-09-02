@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1944415692560092417, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -20.987202
       objectReference: {fileID: 0}
     - target: {fileID: 1944415692560092417, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.488142
       objectReference: {fileID: 0}
     - target: {fileID: 1944415692560092417, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3856737232819680605, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 479d2008c69cea75c966a824215039b4, type: 3}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Name
       value: Flying Enemy Prefab
@@ -60,12 +64,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6194247268878444071, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Name
+      value: Enemy02Graphic
+      objectReference: {fileID: 0}
     - target: {fileID: 8010194105115732091, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6518816623773855828, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+    - {fileID: 503619224642569098, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

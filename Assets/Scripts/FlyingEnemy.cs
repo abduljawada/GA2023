@@ -11,7 +11,7 @@ public class FlyingEnemy : Enemy
     [SerializeField] private Vector2 eggOffset;
     private float _timeToNextAttack;
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
-
+    private Animator animator;
     private void Start()
     {
         _timeToNextAttack = attackRate;
@@ -61,5 +61,7 @@ public class FlyingEnemy : Enemy
 
         Vector2 flyingDir = ((Vector3)flyPoint - transform.position).normalized;
         Rigidbody2D.velocity = flyingDir * speed;
+        
+
     }
 }
