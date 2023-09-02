@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 274078636117935788, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1944415692560092417, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -52,17 +56,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4080528144129991072, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Name
-      value: Jumping Enemy Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010194105115732091, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+      value: Enemy Jumping Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6518816623773855828, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
@@ -74,10 +70,7 @@ PrefabInstance:
       addedObject: {fileID: 6222147459387664121}
     - targetCorrespondingSourceObject: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1600772354282126273}
-    - targetCorrespondingSourceObject: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6391930548546556743}
+      addedObject: {fileID: 8326741783678574392}
   m_SourcePrefab: {fileID: 100100000, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
 --- !u!1 &1129509512403480951 stripped
 GameObject:
@@ -97,85 +90,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearingRange: 5
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
   mutationPrefab: {fileID: 4921398309040590552, guid: 3e177ea0b3feede01b66bf31683cc4cb, type: 3}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  circleRadius: 0.4
   jumpDir: {x: -2, y: 10}
   timeOnGround: 2
---- !u!50 &1600772354282126273
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129509512403480951}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &6391930548546556743
-BoxCollider2D:
+--- !u!114 &8326741783678574392
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129509512403480951}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b17889bf070e776bbc767402e79f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckOffset: 0.5
+  circleRadius: 0.4
