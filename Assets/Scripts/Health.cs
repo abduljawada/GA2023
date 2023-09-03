@@ -1,17 +1,23 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 6;
     private int _currentHealth;
 
     [SerializeField] private UnityEvent onDamageEvent;
     [SerializeField] private UnityEvent onDeathEvent;
 
     [SerializeField] private TMP_Text playerHealthText;
+
+    [SerializeField] private GameObject sixHearts;
+    [SerializeField] private GameObject fiveHearts;
+    [SerializeField] private GameObject fourHearts;
+    [SerializeField] private GameObject threeHearts;
+    [SerializeField] private GameObject twoHearts;
+    [SerializeField] private GameObject oneHeart;
 
     private void Awake()
     {
@@ -24,20 +30,65 @@ public class Health : MonoBehaviour
         
         onDamageEvent?.Invoke();
 
-        if (transform.parent.tag.Equals("Player"))
+        if (transform.tag.Equals("Player"))
         {
-            playerHealthText.text = _currentHealth.ToString();
+            //playerHealthText.text = _currentHealth.ToString();
+            switch(_currentHealth)
+            {
+                case 6:
+                    sixHearts.SetActive(true);
+                    fiveHearts.SetActive(false);
+                    fourHearts.SetActive(false);
+                    threeHearts.SetActive(false);
+                    twoHearts.SetActive(false);
+                    oneHeart.SetActive(false);
+                    break;
+                case 5:
+                    sixHearts.SetActive(false);
+                    fiveHearts.SetActive(true);
+                    fourHearts.SetActive(false);
+                    threeHearts.SetActive(false);
+                    twoHearts.SetActive(false);
+                    oneHeart.SetActive(false);
+                    break;
+                case 4:
+                    sixHearts.SetActive(false);
+                    fiveHearts.SetActive(false);
+                    fourHearts.SetActive(true);
+                    threeHearts.SetActive(false);
+                    twoHearts.SetActive(false);
+                    oneHeart.SetActive(false);
+                    break;
+                case 3:
+                    sixHearts.SetActive(false);
+                    fiveHearts.SetActive(false);
+                    fourHearts.SetActive(false);
+                    threeHearts.SetActive(true);
+                    twoHearts.SetActive(false);
+                    oneHeart.SetActive(false);
+                    break;
+                case 2:
+                    sixHearts.SetActive(false);
+                    fiveHearts.SetActive(false);
+                    fourHearts.SetActive(false);
+                    threeHearts.SetActive(false);
+                    twoHearts.SetActive(true);
+                    oneHeart.SetActive(false);
+                    break;
+                case 1:
+                    sixHearts.SetActive(false);
+                    fiveHearts.SetActive(false);
+                    fourHearts.SetActive(false);
+                    threeHearts.SetActive(false);
+                    twoHearts.SetActive(false);
+                    oneHeart.SetActive(true);
+                    break;
+            }
         }
 
         if (_currentHealth > 0) return;
+        
         onDeathEvent?.Invoke();
-
-        if (transform.parent.tag.Equals("Player"))
-        {
-            FindObjectOfType<GameOver>().EndGame();
-        }
-	
-        Destroy(transform.parent.gameObject);
     }
 
     public void Reset()

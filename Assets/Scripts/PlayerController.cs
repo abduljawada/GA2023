@@ -1,13 +1,23 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(GroundChecker))]
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
     private AnimationManager animManager => GetComponent<AnimationManager>();
 
+    private GroundChecker GroundChecker => GetComponent<GroundChecker>();
+
+    [SerializeField] private SaveData saveData;
+    
     [Header("Speed")]
-    [SerializeField] private float acceleration = 3f;
+    [SerializeField] private float groundAcceleration = 3f;
+
+    [SerializeField] private float airAcceleration = 5f;
     [SerializeField] private float maxSpeed = 5f;
     private float _moveDir;
     
@@ -17,10 +27,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float velocityFallMultiplier = 0.5f;
     private float _timeSinceJump;
     
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float circleRadius = 0.4f;
-    
     [Header("Attack")]
     [SerializeField] private GameObject hitbox;
     [SerializeField] private float attackRate = 0.5f;
@@ -28,11 +34,16 @@ public class PlayerMovement : MonoBehaviour
     private float _nextAttackTime;
     private bool _isAttacking;
 
+    private void Start()
+    {
+        transform.position = saveData.spawnPos;
+    }
+
     private void Update()
     {
         _moveDir = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded()) Jump();
+        if (Input.GetKeyDown(KeyCode.UpArrow) && GroundChecker.IsGrounded()) Jump();
         
         _timeSinceJump += Time.deltaTime;
 
@@ -51,17 +62,14 @@ public class PlayerMovement : MonoBehaviour
             };
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && Time.time > _nextAttackTime)
-        {
-            _nextAttackTime = Time.time + attackRate;
-            StartCoroutine(AttackCoroutine());
-        }
+        if (!Input.GetKeyDown(KeyCode.Z) || !(Time.time > _nextAttackTime)) return;
+        _nextAttackTime = Time.time + attackRate;
+        StartCoroutine(AttackCoroutine());
 
     }
     private void FixedUpdate()
     {
-        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * acceleration);
-
+        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * (GroundChecker.IsGrounded()? groundAcceleration : airAcceleration));
         Rigidbody2D.velocity = new Vector2(moveVelocityX, Rigidbody2D.velocity.y);
     }
 
@@ -81,17 +89,4 @@ public class PlayerMovement : MonoBehaviour
         hitbox.SetActive(false);
         _isAttacking = false;
     }
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(transform.position - Vector3.up * 1f, circleRadius, groundLayer);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position - Vector3.up * 0.5f, circleRadius);
-    }
-
-
 }

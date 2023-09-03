@@ -80,6 +80,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a150996b741c4e0b02119440ab9411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toDamageLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &9200714214602148596
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +95,7 @@ GameObject:
   - component: {fileID: 4872984014776393420}
   - component: {fileID: 1094260203904328169}
   - component: {fileID: 8187812786888939392}
+  - component: {fileID: 7497094616295832263}
   - component: {fileID: 7075707366084448613}
   m_Layer: 0
   m_Name: Egg Prefab
@@ -230,6 +234,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7497094616295832263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200714214602148596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8300b52d1a5e406394fefff79d0491ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7075707366084448613}
+        m_TargetAssemblyTypeName: EventDestroy, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7075707366084448613
 MonoBehaviour:
   m_ObjectHideFlags: 0
