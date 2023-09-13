@@ -10,7 +10,5 @@ public class DamageOnTrigger : MonoBehaviour
         { 
             other.GetComponent<Health>().LoseHealth(damage);
         }
-        //TODO: Fix Console Errors
-        //Debug.Log(name + " hitting " + other.name);
     }
 }

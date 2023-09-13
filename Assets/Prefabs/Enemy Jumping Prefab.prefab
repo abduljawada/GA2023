@@ -12,6 +12,22 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 274078636117935788, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 503619224642569098, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 879f3c07c3d73fe45a58b15f1bb43165, type: 2}
+    - target: {fileID: 1149617262619623600, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485350993462069800, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1944415692560092417, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -56,9 +72,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3856737232819680605, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 558440b286944360694a7536e7f67d8d, type: 3}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Name
       value: Enemy Jumping Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824143285864756612, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824143285864756612, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6518816623773855828, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}

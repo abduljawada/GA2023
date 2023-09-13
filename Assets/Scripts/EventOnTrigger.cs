@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class EventOnTrigger : MonoBehaviour
 {
-    [SerializeField] private UnityEvent @event;
-    private void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] protected UnityEvent @event;
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         @event?.Invoke();
 
@@ -13,4 +13,4 @@ public class EventOnTrigger : MonoBehaviour
             FindObjectOfType<GemCollect>().AddGem();
         }
     }
-}
+}   

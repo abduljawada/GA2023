@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -14,6 +15,16 @@ public abstract class Enemy : MonoBehaviour
 
     protected States State { get; private set; }= States.Idle;
 
+    public event EventHandler OnIdle;
+    public event EventHandler OnChase;
+    public event EventHandler<EntityEventArgs> ChangeDir;
+
+    protected void OnChangeDir(EntityEventArgs e)
+    {
+        ChangeDir?.Invoke(this, e);
+    }
+    
+
     protected void CheckPlayerInRange()
     {
         var playerCollider2D = Physics2D.OverlapCircle(transform.position, hearingRange, _playerLayerMask);
@@ -28,14 +39,16 @@ public abstract class Enemy : MonoBehaviour
         TransitionToChase(playerCollider2D);
     }
 
-    protected virtual void TransitionToIdle()
+    protected void TransitionToIdle()
     {
         State = States.Idle;
+        OnIdle?.Invoke(this, EventArgs.Empty);
     }
     
     protected virtual void TransitionToChase(Collider2D player)
     {
         State = States.Chase;
+        OnChase?.Invoke(this, EventArgs.Empty);
     }
     
     private void OnDisable()

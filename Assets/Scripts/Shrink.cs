@@ -4,7 +4,7 @@ public class Shrink : MonoBehaviour
 {
     private const float CeilingCheckOffset = 1f;
     private const float CircleRadius = 0.4f;
-    private static readonly LayerMask GroundLayer = 1 << 6;
+    private static readonly LayerMask GroundLayer = 1 << 0;
     private const float NewScale = 0.5f;
     [HideInInspector] public bool isFromCeiling;
 

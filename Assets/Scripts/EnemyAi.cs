@@ -4,31 +4,23 @@ public class EnemyAi : MonoBehaviour
 {
     [SerializeField] private Vector2 moveDir = new(1,0);
     [SerializeField] private float speed = 3.5f;
-    [SerializeField] private bool isFacingLeft = true;
 
     private void Update()
     {
         transform.Translate(moveDir * (speed * Time.deltaTime));
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D()
     {
-        // change position of movement
-	    moveDir *= -1;
-
-        if (moveDir.x > 0 && isFacingLeft) 
-            Flip();
-
-        else if (moveDir.x < 0 && !isFacingLeft) 
-            Flip();
+        moveDir *= -1;
+        Flip();
     }
-
-    // Flip sprite of object when colliding with obstacle
+    
     private void Flip()
     {
-        isFacingLeft = !isFacingLeft;
-        Vector3 theScale = transform.localScale;
+        var transform1 = transform;
+        var theScale = transform1.localScale;
         theScale.x *= -1;
-        transform.localScale = theScale;
+        transform1.localScale = theScale;
     }
 
 }

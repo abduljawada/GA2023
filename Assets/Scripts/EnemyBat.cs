@@ -6,6 +6,7 @@ public class EnemyBat : Enemy
     [SerializeField] private float speed = 3f;
     private Vector2 _attackPos;
     private Vector2 _originalPos;
+    private bool _reachedAttackPos;
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
 
     private void Start()
@@ -18,60 +19,71 @@ public class EnemyBat : Enemy
         switch (State)
         {
             case States.Idle:
-                if (Rigidbody2D.velocity == Vector2.zero)
-                {
-                    CheckPlayerInRange();
-                }
-                else if (Rigidbody2D.velocity.y != 0)
-                {
-                    if (Rigidbody2D.velocity.y < 0f && transform.position.y <= _originalPos.y ||
-                        Rigidbody2D.velocity.y > 0f && transform.position.y >= _originalPos.y)
-                    {
-                        Rigidbody2D.velocity = Vector2.zero;
-                    }
-                }
-                else
-                {
-                    if (Rigidbody2D.velocity.x < 0f && transform.position.x <= _originalPos.x ||
-                        Rigidbody2D.velocity.x > 0f && transform.position.x >= _originalPos.x)
-                    {
-                        Rigidbody2D.velocity = Vector2.zero;
-                    }
-                }
+                CheckPlayerInRange();
                 break;
             case States.Chase:
-                if (Rigidbody2D.velocity.y != 0f)
+                if (Rigidbody2D.velocity.Equals(Vector2.zero))
                 {
-                    if (Rigidbody2D.velocity.y < 0f && transform.position.y <= _attackPos.y ||
-                        Rigidbody2D.velocity.y > 0f && transform.position.y >= _attackPos.y)
+                    _reachedAttackPos = false;
+                    TransitionToIdle();
+                }
+
+                if (_reachedAttackPos)
+                {
+                    if (Rigidbody2D.velocity.y != 0)
                     {
-                        TransitionToIdle();
+                        if (Rigidbody2D.velocity.y < 0f && transform.position.y <= _originalPos.y ||
+                            Rigidbody2D.velocity.y > 0f && transform.position.y >= _originalPos.y)
+                        {
+                            Rigidbody2D.velocity = Vector2.zero;
+                        }
+                    }
+                    else
+                    {
+                        if (Rigidbody2D.velocity.x < 0f && transform.position.x <= _originalPos.x ||
+                            Rigidbody2D.velocity.x > 0f && transform.position.x >= _originalPos.x)
+                        {
+                            Rigidbody2D.velocity = Vector2.zero;
+                        }
                     }
                 }
                 else
                 {
-                    if (Rigidbody2D.velocity.x < 0f && transform.position.x <= _attackPos.x ||
-                        Rigidbody2D.velocity.x > 0f && transform.position.x >= _attackPos.x)
+                    var dir = Rigidbody2D.velocity.x;
+                    if (dir != 0)
                     {
-                        TransitionToIdle();
+                        OnChangeDir(new EntityEventArgs(){Dir = dir});
+                    }
+                    if (Rigidbody2D.velocity.y != 0f)
+                    {
+                        if (Rigidbody2D.velocity.y < 0f && transform.position.y <= _attackPos.y ||
+                            Rigidbody2D.velocity.y > 0f && transform.position.y >= _attackPos.y)
+                        {
+                            _reachedAttackPos = true;
+                            Rigidbody2D.velocity = (_originalPos - (Vector2)transform.position).normalized * speed;
+                        }
+                    }
+                    else
+                    {
+                        if (Rigidbody2D.velocity.x < 0f && transform.position.x <= _attackPos.x ||
+                            Rigidbody2D.velocity.x > 0f && transform.position.x >= _attackPos.x)
+                        {
+                            _reachedAttackPos = true;
+                            Rigidbody2D.velocity = (_originalPos - (Vector2)transform.position).normalized * speed;
+                        }
                     }
                 }
+
                 break;
-            default:
+                default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
     public void OnHitPlayer()
     {
+        //TODO: implement connection
         TransitionToIdle();
-    }
-
-    protected override void TransitionToIdle()
-    {
-        base.TransitionToIdle();
-        
-        Rigidbody2D.velocity = (_originalPos - (Vector2)transform.position).normalized * speed;
     }
 
     protected override void TransitionToChase(Collider2D player)

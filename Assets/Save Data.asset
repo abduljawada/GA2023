@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ff36865a52eb18e9d73f0f7a150240, type: 3}
   m_Name: Save Data
   m_EditorClassIdentifier: 
-  spawnPos: {x: -47, y: 2}
+  spawnPos: {x: -22, y: 2}

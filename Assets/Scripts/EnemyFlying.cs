@@ -31,6 +31,7 @@ public class EnemyFlying : Enemy
                     if (transform.position.y >= flyPoint.y)
                     {
                         Rigidbody2D.velocity = Vector2.right * speed;
+                        OnChangeDir(new EntityEventArgs(){Dir = Rigidbody2D.velocity.x});
                     }
                     
                     return;
@@ -39,10 +40,12 @@ public class EnemyFlying : Enemy
                 if (transform.position.x > flyPoint.x + flyDistance)
                 {
                     Rigidbody2D.velocity = Vector2.left * speed;
+                    OnChangeDir(new EntityEventArgs(){Dir = Rigidbody2D.velocity.x});
                 }
                 else if (transform.position.x < flyPoint.x - flyDistance)
                 {
                     Rigidbody2D.velocity = Vector2.right * speed;
+                    OnChangeDir(new EntityEventArgs(){Dir = Rigidbody2D.velocity.x});
                 }
 
                 _timeToNextAttack -= Time.deltaTime;
@@ -64,7 +67,6 @@ public class EnemyFlying : Enemy
 
         Vector2 flyingDir = ((Vector3)flyPoint - transform.position).normalized;
         Rigidbody2D.velocity = flyingDir * speed;
-        
-
+        OnChangeDir(new EntityEventArgs(){Dir = Rigidbody2D.velocity.x});
     }
 }

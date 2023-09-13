@@ -1,23 +1,22 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(GroundChecker))]
 public class PlayerController : MonoBehaviour
 {
+    public event EventHandler<EntityEventArgs> OnStop;
+    public event EventHandler<EntityEventArgs> OnWalk;
+    public event EventHandler<EntityEventArgs> OnJump;
+    
     private Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
-    private AnimationManager animManager => GetComponent<AnimationManager>();
-
     private GroundChecker GroundChecker => GetComponent<GroundChecker>();
 
     [SerializeField] private SaveData saveData;
     
     [Header("Speed")]
-    [SerializeField] private float groundAcceleration = 3f;
-
-    [SerializeField] private float airAcceleration = 5f;
+    [SerializeField] private float acceleration = 7.5f;
     [SerializeField] private float maxSpeed = 5f;
     private float _moveDir;
     
@@ -43,7 +42,25 @@ public class PlayerController : MonoBehaviour
     {
         _moveDir = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && GroundChecker.IsGrounded()) Jump();
+        var isGrounded = GroundChecker.IsGrounded();
+        
+        if(isGrounded)
+        {
+            if (_moveDir != 0f)
+            {
+                OnWalk?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+            }
+            else
+            {
+                OnStop?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+            }
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow)) Jump();
+        }
+        else
+        {
+            OnJump?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+        }
         
         _timeSinceJump += Time.deltaTime;
 
@@ -69,7 +86,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * (GroundChecker.IsGrounded()? groundAcceleration : airAcceleration));
+        var moveVelocityX = Mathf.Lerp(Rigidbody2D.velocity.x, _moveDir * maxSpeed, Time.deltaTime * acceleration);
         Rigidbody2D.velocity = new Vector2(moveVelocityX, Rigidbody2D.velocity.y);
     }
 
@@ -78,7 +95,6 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D.velocity *= Vector2.right;
         Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _timeSinceJump = 0;
-        animManager.Invoke("JumpAnimation", 0.01f);
     }
     
     private IEnumerator AttackCoroutine()
