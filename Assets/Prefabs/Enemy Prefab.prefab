@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944415692560092417}
-  - component: {fileID: 6518816623773855828}
   - component: {fileID: 1149617262619623600}
   - component: {fileID: 274078636117935788}
   - component: {fileID: 4330663921584972757}
   - component: {fileID: 576113128542087346}
+  - component: {fileID: 4913175425737927833}
+  - component: {fileID: 7906915743486288506}
   m_Layer: 10
   m_Name: Enemy Prefab
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4481973313431022222}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,22 +38,7 @@ Transform:
   - {fileID: 5823537569106319364}
   - {fileID: 4824143285864756612}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6518816623773855828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4481973313431022222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e05e7aa81207b44b91cee240a120548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDir: {x: 1, y: 0}
-  speed: 3.5
 --- !u!61 &1149617262619623600
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +126,31 @@ MonoBehaviour:
   maxHealth: 3
   onDamageEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7906915743486288506}
+        m_TargetAssemblyTypeName: EventOnTimer, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3856737232819680605}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -155,7 +166,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  playerHealthText: {fileID: 0}
+      - m_Target: {fileID: 3856737232819680605}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   sixHearts: {fileID: 0}
   fiveHearts: {fileID: 0}
   fourHearts: {fileID: 0}
@@ -174,6 +196,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f7d5245179cf356818fcacf3f43675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4913175425737927833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4481973313431022222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9af4071fce37f54ebc662a72b1cc31f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearingRange: 5
+  mutationPrefab: {fileID: 0}
+  speed: 3.5
+--- !u!114 &7906915743486288506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4481973313431022222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d3783e15e2ddd4dba0be0c1be83d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3856737232819680605}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6194247268878444071
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,13 +263,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6194247268878444071}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944415692560092417}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3856737232819680605
 SpriteRenderer:
@@ -305,13 +369,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6798011516110284991}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944415692560092417}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4999804933229355065
 MonoBehaviour:

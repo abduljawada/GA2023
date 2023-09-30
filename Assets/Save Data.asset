@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: Save Data
   m_EditorClassIdentifier: 
   spawnPos: {x: -42, y: 2}
+  gem1: 0
+  gem2: 0
+  gem3: 0
+  gem4: 0

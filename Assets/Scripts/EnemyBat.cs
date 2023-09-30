@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyBat : Enemy
 {
+    [Header("Specific Attributes")]
     [SerializeField] private float speed = 3f;
     private Vector2 _attackPos;
     private Vector2 _originalPos;

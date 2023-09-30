@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 93abd173144bd8d5686c138e0657be92, type: 3}
+    - target: {fileID: 4330663921584972757, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+      propertyPath: onDeathEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4481973313431022222, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
       propertyPath: m_Name
       value: Enemy Bat
@@ -86,6 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6518816623773855828, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
+    - {fileID: 4913175425737927833, guid: 657664a5718ecd31ca2b06541dfef018, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

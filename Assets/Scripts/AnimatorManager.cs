@@ -17,12 +17,16 @@ public class AnimatorManager : MonoBehaviour
     
     private void PlayerControllerOnOnStop(object sender, EntityEventArgs e)
     {
+        if (Time.timeScale == 0f) return;
+        
         Animator.SetBool(IsWalking, false);
         Animator.SetBool(IsJumping, false);
     }
     
     private void PlayerControllerOnOnWalk(object sender, EntityEventArgs e)
     {
+        if (Time.timeScale == 0f) return;
+        
         Animator.SetBool(IsWalking, true);
         Animator.SetBool(IsJumping, false);
         Animator.SetFloat(Dir, e.Dir);
@@ -32,5 +36,9 @@ public class AnimatorManager : MonoBehaviour
     {
         Animator.SetBool(IsWalking, false);
         Animator.SetBool(IsJumping, true);
+        if (e.Dir != 0f)
+        {
+            Animator.SetFloat(Dir, e.Dir);
+        }
     }
 }

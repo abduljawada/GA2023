@@ -29,62 +29,82 @@ public class Health : MonoBehaviour
 
         if (transform.tag.Equals("Player"))
         {
-            switch(_currentHealth)
-            {
-                case 6:
-                    sixHearts.SetActive(true);
-                    fiveHearts.SetActive(false);
-                    fourHearts.SetActive(false);
-                    threeHearts.SetActive(false);
-                    twoHearts.SetActive(false);
-                    oneHeart.SetActive(false);
-                    break;
-                case 5:
-                    sixHearts.SetActive(false);
-                    fiveHearts.SetActive(true);
-                    fourHearts.SetActive(false);
-                    threeHearts.SetActive(false);
-                    twoHearts.SetActive(false);
-                    oneHeart.SetActive(false);
-                    break;
-                case 4:
-                    sixHearts.SetActive(false);
-                    fiveHearts.SetActive(false);
-                    fourHearts.SetActive(true);
-                    threeHearts.SetActive(false);
-                    twoHearts.SetActive(false);
-                    oneHeart.SetActive(false);
-                    break;
-                case 3:
-                    sixHearts.SetActive(false);
-                    fiveHearts.SetActive(false);
-                    fourHearts.SetActive(false);
-                    threeHearts.SetActive(true);
-                    twoHearts.SetActive(false);
-                    oneHeart.SetActive(false);
-                    break;
-                case 2:
-                    sixHearts.SetActive(false);
-                    fiveHearts.SetActive(false);
-                    fourHearts.SetActive(false);
-                    threeHearts.SetActive(false);
-                    twoHearts.SetActive(true);
-                    oneHeart.SetActive(false);
-                    break;
-                case 1:
-                    sixHearts.SetActive(false);
-                    fiveHearts.SetActive(false);
-                    fourHearts.SetActive(false);
-                    threeHearts.SetActive(false);
-                    twoHearts.SetActive(false);
-                    oneHeart.SetActive(true);
-                    break;
-            }
+            UpdateHealthUI();
         }
 
         if (_currentHealth > 0) return;
         
         onDeathEvent?.Invoke();
+    }
+
+    public void Heal(int healthToHeal = 1)
+    {
+        _currentHealth += healthToHeal;
+
+        if (_currentHealth > maxHealth)
+        {
+            _currentHealth = maxHealth;
+        }
+        
+        if (transform.tag.Equals("Player"))
+        {
+            UpdateHealthUI();
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        switch (_currentHealth)
+        {
+            case 6:
+                sixHearts.SetActive(true);
+                fiveHearts.SetActive(false);
+                fourHearts.SetActive(false);
+                threeHearts.SetActive(false);
+                twoHearts.SetActive(false);
+                oneHeart.SetActive(false);
+                break;
+            case 5:
+                sixHearts.SetActive(false);
+                fiveHearts.SetActive(true);
+                fourHearts.SetActive(false);
+                threeHearts.SetActive(false);
+                twoHearts.SetActive(false);
+                oneHeart.SetActive(false);
+                break;
+            case 4:
+                sixHearts.SetActive(false);
+                fiveHearts.SetActive(false);
+                fourHearts.SetActive(true);
+                threeHearts.SetActive(false);
+                twoHearts.SetActive(false);
+                oneHeart.SetActive(false);
+                break;
+            case 3:
+                sixHearts.SetActive(false);
+                fiveHearts.SetActive(false);
+                fourHearts.SetActive(false);
+                threeHearts.SetActive(true);
+                twoHearts.SetActive(false);
+                oneHeart.SetActive(false);
+                break;
+            case 2:
+                sixHearts.SetActive(false);
+                fiveHearts.SetActive(false);
+                fourHearts.SetActive(false);
+                threeHearts.SetActive(false);
+                twoHearts.SetActive(true);
+                oneHeart.SetActive(false);
+                break;
+            case 1:
+                sixHearts.SetActive(false);
+                fiveHearts.SetActive(false);
+                fourHearts.SetActive(false);
+                threeHearts.SetActive(false);
+                twoHearts.SetActive(false);
+                oneHeart.SetActive(true);
+                break;
+        }
     }
 
     public void Reset()

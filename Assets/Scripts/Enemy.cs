@@ -23,7 +23,6 @@ public abstract class Enemy : MonoBehaviour
     {
         ChangeDir?.Invoke(this, e);
     }
-    
 
     protected void CheckPlayerInRange()
     {
@@ -54,6 +53,7 @@ public abstract class Enemy : MonoBehaviour
     private void OnDisable()
     {
         if (!gameObject.scene.isLoaded) return;
+        if (!mutationPrefab) return;
         Instantiate(mutationPrefab, transform.position, Quaternion.identity);
     }
     

@@ -18,12 +18,17 @@ public class PlayerController : MonoBehaviour
     [Header("Speed")]
     [SerializeField] private float acceleration = 7.5f;
     [SerializeField] private float maxSpeed = 5f;
+    [SerializeField] private float maxFallSpeed = -20f;
     private float _moveDir;
     
     [Header("Jump")]
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float minJumpTime = 0.2f;
     [SerializeField] private float velocityFallMultiplier = 0.5f;
+    [SerializeField] private float jumpPressRememberTime = 0.2f;
+    [SerializeField] private float GroundedRememberTime = 0.2f;
+    private float _timeSinceGrounded;
+    private float _timeSinceJumpPress;
     private float _timeSinceJump;
     
     [Header("Attack")]
@@ -44,8 +49,23 @@ public class PlayerController : MonoBehaviour
 
         var isGrounded = GroundChecker.IsGrounded();
         
+        _timeSinceJumpPress -= Time.deltaTime;
+        _timeSinceGrounded -= Time.deltaTime;
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+            _timeSinceJumpPress = jumpPressRememberTime;
+
+        if (_timeSinceJumpPress >= 0 && _timeSinceGrounded >= 0)
+        {
+            Jump();
+            _timeSinceJumpPress = 0;
+            _timeSinceGrounded = 0;
+        }
+        
         if(isGrounded)
         {
+            _timeSinceGrounded = GroundedRememberTime;
+            
             if (_moveDir != 0f)
             {
                 OnWalk?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
@@ -54,18 +74,19 @@ public class PlayerController : MonoBehaviour
             {
                 OnStop?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
             }
-            
-            if (Input.GetKeyDown(KeyCode.UpArrow)) Jump();
         }
         else
         {
             OnJump?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+            if (Rigidbody2D.velocity.y < maxFallSpeed)
+            {
+                Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, maxFallSpeed);
+            }
         }
         
         _timeSinceJump += Time.deltaTime;
-
-        //TODO: Add Space for jumping
-        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !Input.GetKey(KeyCode.UpArrow)) 
+        
+        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.Space)) 
         {
             Rigidbody2D.velocity *= new Vector2(1, velocityFallMultiplier);
         }
