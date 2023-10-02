@@ -11,7 +11,7 @@ public class Fly : MonoBehaviour
 
 	private void Update()
 	{
-		_willFly = Input.GetKey(KeyCode.UpArrow);
+		_willFly = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
 		if (!_willFly) _isFlying = false;
 	}
 	

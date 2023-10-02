@@ -11,7 +11,7 @@ public class EventOnTimer : MonoBehaviour
         StartCoroutine(TimerCoroutine(time));
     }
 
-    IEnumerator TimerCoroutine(float time)
+    private IEnumerator TimerCoroutine(float time)
     {
         yield return new WaitForSeconds(time);
         onTimerEnd?.Invoke();

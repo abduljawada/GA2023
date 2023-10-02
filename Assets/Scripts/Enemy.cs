@@ -55,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
         if (!gameObject.scene.isLoaded) return;
         if (!mutationPrefab) return;
         Instantiate(mutationPrefab, transform.position, Quaternion.identity);
+        TransitionToIdle();
     }
     
     private void OnDrawGizmosSelected()

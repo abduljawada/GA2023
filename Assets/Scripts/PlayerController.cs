@@ -26,13 +26,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minJumpTime = 0.2f;
     [SerializeField] private float velocityFallMultiplier = 0.5f;
     [SerializeField] private float jumpPressRememberTime = 0.2f;
-    [SerializeField] private float GroundedRememberTime = 0.2f;
+    [SerializeField] private float groundedRememberTime = 0.2f;
     private float _timeSinceGrounded;
     private float _timeSinceJumpPress;
     private float _timeSinceJump;
     
     [Header("Attack")]
-    [SerializeField] private GameObject hitbox;
+    [SerializeField] private GameObject hitBox;
     [SerializeField] private float attackRate = 0.5f;
     [SerializeField] private float attackTime = 0.3f;
     private float _nextAttackTime;
@@ -51,11 +51,8 @@ public class PlayerController : MonoBehaviour
         
         _timeSinceJumpPress -= Time.deltaTime;
         _timeSinceGrounded -= Time.deltaTime;
-        
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
-            _timeSinceJumpPress = jumpPressRememberTime;
 
-        if (_timeSinceJumpPress >= 0 && _timeSinceGrounded >= 0)
+        if (_timeSinceJumpPress > 0 && _timeSinceGrounded > 0)
         {
             Jump();
             _timeSinceJumpPress = 0;
@@ -64,20 +61,23 @@ public class PlayerController : MonoBehaviour
         
         if(isGrounded)
         {
-            _timeSinceGrounded = GroundedRememberTime;
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+                _timeSinceJumpPress = jumpPressRememberTime;
+            
+            _timeSinceGrounded = groundedRememberTime;
             
             if (_moveDir != 0f)
             {
-                OnWalk?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+                OnWalk?.Invoke(this, new EntityEventArgs {Dir = _moveDir});
             }
             else
             {
-                OnStop?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+                OnStop?.Invoke(this, new EntityEventArgs {Dir = _moveDir});
             }
         }
         else
         {
-            OnJump?.Invoke(this, new EntityEventArgs(){Dir = _moveDir});
+            OnJump?.Invoke(this, new EntityEventArgs {Dir = _moveDir});
             if (Rigidbody2D.velocity.y < maxFallSpeed)
             {
                 Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, maxFallSpeed);
@@ -86,22 +86,22 @@ public class PlayerController : MonoBehaviour
         
         _timeSinceJump += Time.deltaTime;
         
-        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.Space)) 
+        if (Rigidbody2D.velocity.y > 0 && _timeSinceJump >= minJumpTime && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.W)) 
         {
             Rigidbody2D.velocity *= new Vector2(1, velocityFallMultiplier);
         }
 
         if (!_isAttacking)
         {
-            hitbox.transform.localPosition = _moveDir switch
+            hitBox.transform.localPosition = _moveDir switch
             {
                 > 0 => new Vector3(1.0f, 0),
                 < 0 => new Vector3(-1.0f, 0),
-                _ => hitbox.transform.localPosition
+                _ => hitBox.transform.localPosition
             };
         }
 
-        if (!Input.GetKeyDown(KeyCode.Z) || !(Time.time > _nextAttackTime)) return;
+        if ((!Input.GetKeyDown(KeyCode.Z) && !Input.GetKeyDown(KeyCode.RightShift)) || !(Time.time > _nextAttackTime)) return;
         _nextAttackTime = Time.time + attackRate;
         StartCoroutine(AttackCoroutine());
 
@@ -122,9 +122,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
-        hitbox.SetActive(true);
+        hitBox.SetActive(true);
         yield return new WaitForSeconds(attackTime);
-        hitbox.SetActive(false);
+        hitBox.SetActive(false);
         _isAttacking = false;
     }
 }

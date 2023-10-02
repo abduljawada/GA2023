@@ -23,12 +23,10 @@ public class MutationManager : MonoBehaviour
             if (!GetComponent(Type.GetType(_mutationInventory[0].name))) ActivateMutation(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (!_mutationInventory[1]) return;
-            if (!GetComponent(Type.GetType(_mutationInventory[1].name))) ActivateMutation(1);
-        }
-        
+        if (!Input.GetKeyDown(KeyCode.C)) return;
+        if (!_mutationInventory[1]) return;
+        if (!GetComponent(Type.GetType(_mutationInventory[1].name))) ActivateMutation(1);
+
     }
 
     public void AddMutation(GameObject mutationObject, MutationData mutationData)

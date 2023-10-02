@@ -3,5 +3,5 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerReferences : MonoBehaviour
 {
-    [SerializeField] public Light2D Light2D;
+    [SerializeField] public Light2D light2D;
 }

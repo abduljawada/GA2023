@@ -53,7 +53,7 @@ public class EnemyBat : Enemy
                     var dir = Rigidbody2D.velocity.x;
                     if (dir != 0)
                     {
-                        OnChangeDir(new EntityEventArgs(){Dir = dir});
+                        OnChangeDir(new EntityEventArgs {Dir = dir});
                     }
                     if (Rigidbody2D.velocity.y != 0f)
                     {

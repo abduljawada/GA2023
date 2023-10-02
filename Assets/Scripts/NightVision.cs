@@ -4,7 +4,7 @@ using UnityEngine.Rendering.Universal;
 public class NightVision : MonoBehaviour
 {
     private PlayerReferences PlayerReferences => GetComponent<PlayerReferences>();
-    private Light2D Light2D => PlayerReferences.Light2D;
+    private Light2D Light2D => PlayerReferences.light2D;
     private float _originalFalloffIntensity;
     private void Start()
     {

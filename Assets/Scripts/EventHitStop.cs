@@ -11,11 +11,6 @@ public class EventHitStop : MonoBehaviour
         StartCoroutine(HitStopCoroutine());
     }
 
-    public void ResetTime()
-    {
-        Time.timeScale = 1f;
-    }
-
     private IEnumerator HitStopCoroutine()
     {
         Time.timeScale = 0.05f;
